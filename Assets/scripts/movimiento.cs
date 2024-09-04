@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class movimiento : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class movimiento : MonoBehaviour
     public bool CanJump;
     public float velocityMagnitude;
     public Vector3 velocity;
+    public int CollectedItems;
+
+    public TMPro.TextMeshProUGUI scoreText;
+
+
     
 
     // Start is called before the first frame update
@@ -55,6 +61,13 @@ public class movimiento : MonoBehaviour
         if (collision.gameObject.CompareTag("goal"))
         {
             SceneManager.LoadScene(1);
+        }
+
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            Destroy(collision.gameObject);
+            CollectedItems++;
+            scoreText.text = CollectedItems.ToString();
         }
     }
 }
